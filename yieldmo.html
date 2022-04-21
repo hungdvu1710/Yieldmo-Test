@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switch Ad Format</title>
+  <style>
+    #ad {
+      margin:auto;
+      display:block;
+    }
+
+    .text-question-answer {
+      margin: 20px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <div class="text-question-answer">
+    <h3>Question 2:</h3>
+    <p>Differences between JavaScript and TypeScript:
+    </p>
+    <p>   - TypeScript is an Object Oriented Programming Language while JavaScript is a Scripting Language</p>
+    <p>   - TypeScript supports static typing while JavaScript can only support dynamic typing</p>
+    <p>
+      Depending on the nature of my project, I might have different decisions to choose TypeScript or JavaScript. 
+      At its core, TypeScript is a strongly typed JavaScript that better supports OOP. Using TypeScript will 
+      prevent the complexities and confusions that the loosely typed JavaScript can create. If the project I have 
+      to work on has a large scale with great complexity, I’ll prefer TypeScript. However, if it’s just a small or 
+      maybe medium size project, I’ll just use JavaScript. Since the browser can’t directly read TypeScript, 
+      TypeScript will take some time to be compiled and converted to JavaScript. In conclusion, if my project is 
+      small and simple enough, I’ll prefer JavaScript. Otherwise, I’ll prefer TypeScript for larger scale and 
+      complicated projects.
+    </p>
+  </div>
+  <div class="iframe-wrapper">
+    <iframe id="ad" src="" frameborder="0" scrolling="no" width="300px" height="300px"></iframe>
+  </div>
+
+  <div class="text-question-answer">
+    <h3>Question 3:</h3>
+    <p>
+      Out of many challenging projects I’ve worked on, the one I’m most proud of is the scraping tool Chrome Extension. 
+      Back in my time with Secomus Technology, I was asked to work on a Chrome Extension that can crawl reviews from the 
+      major ecommerce platform AliExpress. The problem was, with a Chrome Extension, I couldn’t just install some handy 
+      npm libraries to aid me with scraping and processing the data. But I couldn’t do normal text processing, either. 
+      Since that would create so much unnecessary work and probably slow our extension down by a lot creating terrible 
+      experiences for our users.
+    </p>
+    <p>
+      Yet I didn’t let those obstacles prevent me from finishing the tasks. Using browserify, I was able to translate those 
+      handy npm libraries for scraping, processing data to a format that Chrome Extension can handle. I even utilized mass 
+      requests sending with asynchronous coding to create the fastest scraping experience. This Extension helped our team 
+      out-perform every other opponents in the market and created a whole new selling point for us
+    </p>
+  </div>
+  <script>
+    const dataToIframe = {
+      title: '300px Ad',
+      description: 'Ad in Switch format'
+    }
+    const frame = document.getElementById('ad')
+    frame.src = `${window.location.origin}/ad.html?title=Switch_Ad&description=Yieldmo_test_switch_ad_format&img1=fff.png&img2=Green_008000_300x300.svg.png`
+    frame.contentWindow.postMessage({call:'sendValue', value: dataToIframe});
+    const viewHeight = (window.innerHeight || document.documentElement.clientHeight);
+    document.addEventListener('scroll', (event) => {
+      let adTopCoord = document.getElementById('ad').getBoundingClientRect().top
+      if (adTopCoord + 150 < viewHeight/2) {
+        document.getElementById('ad').contentWindow.scrollTo(0,0)
+      } else {
+        document.getElementById('ad').contentWindow.scrollTo(0,310)
+      }
+    })
+    const logCoordinates = (event) => {
+      setInterval(() => {
+        let coords = {
+          'x-coord': event.clientX,
+          'y-coord': event.clientY
+        }
+
+        $.ajax({
+            url: 'https://jsonplaceholder.typicode.com/posts',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data);
+            },
+            data: JSON.stringify(coords)
+        });
+      }, 250);
+    }
+    
+    document.addEventListener('mousemove', logCoordinates);
+  </script>
+</html>
